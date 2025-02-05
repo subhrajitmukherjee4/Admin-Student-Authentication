@@ -119,34 +119,7 @@ passport.deserializeUser((obj, done) => {
       .catch((err) => done(err));
   }
 });
-//   passport.serializeUser(Student.serializeUser());
-//   passport.deserializeUser(Student.deserializeUser());
-// passport.serializeUser(Admin.serializeUser());
-// passport.deserializeUser(Admin.deserializeUser());
 
-//| admin data inserting |
-// app.get("/demoadmin" ,async(req,res)=>{
-//   let fakeAdmin = new Admin({
-//     email: "aditya@gmail.com",
-//     username:"aditya",
-//   });
-
-// let registeredAdmin= await Admin.register(fakeAdmin,"admin");
-//  register is a static method, it checks if username is unique.
-// res.send(registeredAdmin);
-// });
-
-// app.get("/demostu" ,async(req,res)=>{
-//   let fakeStudent = new Student({
-//     username:"rahul",
-//     name:"Rahul",
-//     email: "rahul@gmail.com",
-//     isActive: true,
-//   });
-
-// let registeredStudent= await Student.register(fakeStudent,"rahul");
-// res.send(registeredStudent);
-// });
 const  checkStatus = ((req, res, next) => {
       if (!req.user.isActive) {
         // return res.status(403).json({ message: "User is inactive. Contact admin." });
@@ -249,14 +222,7 @@ app.post("/admin/add",  AdmLoggedIn, async(req,res)=>{
         const newStudent = new Student({name, username, email, isActive});
         const registeredUser= await Student.register(newStudent, password); //register method is a async method
         console.log(registeredUser);
-        // automatically login
-        // req.login(registeredUser, (err)=>{
-        //     if(err){
-        //        return next(err);
-        //     }
-        //     req.flash("success",`Welcome ${req.user.username}`);
-        //     res.redirect("/listings");
-        // });
+ 
         res.redirect("/admin");
     } catch(e){
         // req.flash("error", e.message);
